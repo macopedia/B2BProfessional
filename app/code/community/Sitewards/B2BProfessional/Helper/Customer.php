@@ -131,7 +131,7 @@ class Sitewards_B2BProfessional_Helper_Customer extends Sitewards_B2BProfessiona
      */
     private function isCustomerAdminCreation(Mage_Customer_Model_Customer $oCustomer)
     {
-        return $oCustomer->getStoreId() === Mage_Core_Model_App::ADMIN_STORE_ID;
+        return (int) $oCustomer->getStoreId() === Mage_Core_Model_App::ADMIN_STORE_ID;
     }
 
     /**
