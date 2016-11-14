@@ -29,11 +29,19 @@ class Sitewards_B2BProfessional_Model_Observer
     protected $oB2BHelper;
 
     /**
+     * The b2b customer helper class
+     *
+     * @var Sitewards_B2BProfessional_Helper_Customer
+     */
+    protected $customerHelper;
+
+    /**
      * Init the helper object
      */
     public function __construct()
     {
         $this->oB2BHelper = Mage::helper('sitewards_b2bprofessional');
+        $this->customerHelper = Mage::helper('sitewards_b2bprofessional/customer');
     }
 
     /**
@@ -121,7 +129,7 @@ class Sitewards_B2BProfessional_Model_Observer
      */
     public function coreBlockAbstractToHtmlBefore(Varien_Event_Observer $oObserver)
     {
-        if ($this->isExtensionActive()) {
+        if ($this->isExtensionActive() && $this->customerHelper->isCustomerLoggedIn() === false) {
             $oBlock = $oObserver->getData('block');
 
             if ($oBlock instanceof Mage_Catalog_Block_Product_List_Toolbar) {
